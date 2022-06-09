@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace stringsearch
+namespace BruteForceAlgorithm
 {
     class BruteForceAlgo
     {
@@ -22,6 +22,7 @@ namespace stringsearch
 
                 if (testCallback(ref chars))
                     return true;
+
                 for (int i1 = len - 1; i1 > -1; --i1)
                 {
                     int i2 = 0;
@@ -48,3 +49,20 @@ namespace stringsearch
                         chars[i1] = testChars[0];
                 }
             }
+
+            return false;
+        }
+
+        static void Main(string[] args)
+        {
+            BruteForceTest testCallback = delegate (ref char[] testChars)
+            {
+                var str = new string(testChars);
+                return (str == "bbc");
+            };
+
+            bool result = BruteForce("abcde", 1, 5, testCallback);
+            Console.WriteLine(result);
+        }
+    }
+}
