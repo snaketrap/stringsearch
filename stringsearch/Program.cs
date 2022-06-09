@@ -22,3 +22,29 @@ namespace stringsearch
 
                 if (testCallback(ref chars))
                     return true;
+                for (int i1 = len - 1; i1 > -1; --i1)
+                {
+                    int i2 = 0;
+
+                    for (i2 = testChars.IndexOf(chars[i1]) + 1; i2 < testChars.Length; ++i2)
+                    {
+                        chars[i1] = testChars[i2];
+
+                        if (testCallback(ref chars))
+                            return true;
+
+                        for (int i3 = i1 + 1; i3 < len; ++i3)
+                        {
+                            if (chars[i3] != testChars[testChars.Length - 1])
+                            {
+                                i1 = len;
+                                goto outerBreak;
+                            }
+                        }
+                    }
+
+                outerBreak:
+                    if (i2 == testChars.Length)
+                        chars[i1] = testChars[0];
+                }
+            }
